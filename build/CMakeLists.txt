@@ -17,11 +17,13 @@ SET( OUTPUT     runFile )
 SET( SOURCE     ${MAIN_DIR}/main.c )
 
 # Library Files #
-ADD_LIBRARY( key  ${LIB_DIR}/key.c )
-ADD_LIBRARY( map ${LIB_DIR}/map.c )
+ADD_LIBRARY( basic  ${LIB_DIR}/basic.c )
+ADD_LIBRARY( key    ${LIB_DIR}/key.c )
+ADD_LIBRARY( map    ${LIB_DIR}/map.c )
+ADD_LIBRARY( user   ${LIB_DIR}/user.c )
 
 # Set Library List # 
-SET( LIB_NAME key map )
+SET( LIB_NAME basic key map user )
 
 # Include #
 INCLUDE_DIRECTORIES( ${INC_DIR} )
@@ -30,7 +32,9 @@ INCLUDE_DIRECTORIES( ${INC_DIR} )
 ADD_EXECUTABLE( ${OUTPUT} ${SOURCE} )
 
 # # Library Link #
-TARGET_LINK_LIBRARIES( ${OUTPUT} PUBLIC ${LIB_NAME} )
+TARGET_LINK_LIBRARIES( map       PRIVATE  basic       )
+TARGET_LINK_LIBRARIES( user      PRIVATE  map         )
+TARGET_LINK_LIBRARIES( ${OUTPUT} PUBLIC   ${LIB_NAME} )
 
 # # Install #
 INSTALL( TARGETS ${OUTPUT} DESTINATION ${INS_DIR} )
