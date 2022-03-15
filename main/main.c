@@ -16,7 +16,7 @@ static char *translate( int nDirection ) {
         case KEY_DOWN:      return "↓";
         case KEY_RIGHT:     return "→";
         case KEY_LEFT:      return "←";
-        default:            return "?";
+        default:            return "??";
         }
 }
 
@@ -27,10 +27,9 @@ int main()
     BOOL isEnd = FALSE;
 
     char tailMsg[DEFAULT_MAP_WIDTH] = {0x00,};
+    char msg[DEFAULT_MAP_WIDTH] = {0x00};
 
     system("clear");
-
-    // SetTitleOpt( FALSE );
 
     CreateMap();
 
@@ -80,10 +79,11 @@ int main()
         case KEY_ENTER:
             if( g_bPopup == FALSE ) {
                 g_bPopup = TRUE;
+
                 ShowPopupMap();
+
                 printf("Input Here : ");
-                char msg[20] = {0x00};
-                fgets(msg, 20, stdin);
+                fgets(msg, DEFAULT_MAP_WIDTH, stdin);
                 fflush(stdin);
 
                 setTitleString(msg, 0);

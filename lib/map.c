@@ -218,6 +218,26 @@ void DestroyMap( void )
         g_arrMap = NULL;
     }
 
+    if( g_strTitle != NULL ) {
+        for( int i=0; i < TITLE_HEIGHT; i++ ) {
+            free( g_strTitle[i] );
+            g_strTitle[i] = NULL;
+        }
+
+        free( g_strTitle );
+        g_strTitle = NULL;        
+    }
+
+    if( g_strTail != NULL ) {
+        for( int i=0; i < TAIL_HEIGHT; i++ ) {
+            free( g_strTail[i] );
+            g_strTail[i] = NULL;
+        }
+
+        free( g_strTail );
+        g_strTail = NULL;        
+    }
+
     TRACE("DestroyMap Done\n");
 }
 
